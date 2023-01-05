@@ -1,4 +1,4 @@
-package com.medtech.invontorymicroservices.dto;
+package com.medtech.ordermicroservices.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
