@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     /**
      * @description This methode to place an order into the database
@@ -46,8 +46,8 @@ public class OrderService {
                 .collect(Collectors.toList());
 
         // CALL A INVENTORY SERVICE, AND PLACE ORDER IF PRODUCT IS IN STOCK
-        InventoryResponse[] inventoryResponseArray = webClient.get()
-                                            .uri("http://localhost:8082/api/inventory", uriBuilder ->
+        InventoryResponse[] inventoryResponseArray = webClientBuilder.build().get()
+                                            .uri("http://inventory-service/api/inventory", uriBuilder ->
                                                     uriBuilder.queryParam("skuCode",skuCodesList).build())
                                             .retrieve()
                                             .bodyToMono(InventoryResponse[].class)
